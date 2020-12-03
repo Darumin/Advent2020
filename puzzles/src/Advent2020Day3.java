@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// About 20 minutes after, some small confusion about how modulo worked again.
 public class Advent2020Day3 {
     public static void main(String[] args) {
         try {

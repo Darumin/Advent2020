@@ -35,8 +35,6 @@ public class Advent2020Day2 {
         }
 
         System.out.println("Valid passwords: " + validPasswords);
-        System.out.println("12 minutes, 9:12PM.");
-
     }
 
     public static void part2(ArrayList<String> puzzleInput) {
@@ -51,6 +49,5 @@ public class Advent2020Day2 {
         }
 
         System.out.println("Valid passwords: " + validPasswords);
-        System.out.println("5 minutes, 9:20PM.");
     }
 }
