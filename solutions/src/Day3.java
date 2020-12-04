@@ -3,10 +3,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Advent2020Day3 {
+public class Day3 {
     public static void main(String[] args) {
         try {
-            File newFile = new File("puzzleinput3.txt");
+            File newFile = new File("input3.txt");
             Scanner in = new Scanner(newFile);
             ArrayList<String> hm = new ArrayList<>();
 

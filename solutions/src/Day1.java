@@ -4,10 +4,10 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class Advent2020Day1 {
+public class Day1 {
     public static void main(String[] args) {
         try {
-            File newFile = new File("puzzleinput1.txt");
+            File newFile = new File("input1.txt");
             Scanner in = new Scanner(newFile);
             HashMap<Integer, Integer> hm = new HashMap<>();
             ArrayList<Integer> al = new ArrayList<>();

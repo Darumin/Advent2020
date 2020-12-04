@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -65,18 +64,18 @@ public class Day4 {
                 pidCompare = false;
 
         String[] yearsGet = {inputs.get("byr"), inputs.get("iyr"), inputs.get("eyr")};
-        if(isNumeric(yearsGet[0])) {
+        if(isInteger(yearsGet[0])) {
             int a = Integer.parseInt(yearsGet[0]);
             byrCompare = (a >= 1920 && a <= 2002);
         }
 
-        if(isNumeric(yearsGet[1])) {
+        if(isInteger(yearsGet[1])) {
             int b = Integer.parseInt(yearsGet[1]);
             System.out.print(b + " ");
             iyrCompare = (b >= 2010 && b <= 2020);
         }
 
-        if(isNumeric(yearsGet[2])) {
+        if(isInteger(yearsGet[2])) {
             int c = Integer.parseInt(yearsGet[2]);
             eyrCompare = (c >= 2020 && c <= 2030);
         }
@@ -103,7 +102,7 @@ public class Day4 {
         }
 
         String pid = inputs.get("pid");
-        pidCompare = (isNumeric(pid) && pid.length() == 9);
+        pidCompare = (isInteger(pid) && pid.length() == 9);
 
         System.out.printf("%b %b %b %b %b %b %b\n",
                 byrCompare, iyrCompare, eyrCompare, hgtCompare, hclCompare, eclCompare, pidCompare);
@@ -115,9 +114,9 @@ public class Day4 {
 
     public static boolean isAlphaNumeric(String input) { return input != null && input.matches("^[a-zA-Z0-9]*$"); }
 
-    public static boolean isNumeric(String input) {
+    public static boolean isInteger(String input) {
         if(input.length() < 1) return false;
-        if(input.charAt(0) == '0') return isNumeric(input.substring(1));
+        if(input.charAt(0) == '0') return isInteger(input.substring(1));
         try {
             int a = Integer.parseInt(input);
             return true;
