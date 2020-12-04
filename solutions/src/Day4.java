@@ -1,58 +1,62 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Day4 {
-    public static void main(String[] args) throws FileNotFoundException {
-        hashInputs("input4.txt");
+    public static void main(String[] args) {
+        var passports = buildPassports("input4.txt");
+        System.out.println(passports);
+//        System.out.println(part1(passports));
     }
 
-    public static void hashInputs(String fileName) {
+    public static ArrayList<String> buildPassports(String fileName) {
+        ArrayList<String> passports = new ArrayList<>();
+        StringBuilder pass = new StringBuilder();
+
         try {
-            int part1 = 0;
-            int part2 = 0;
             File newFile = new File(fileName);
             Scanner in = new Scanner(newFile);
-            HashMap<String, String> hm = new HashMap<>();
 
             while(in.hasNextLine()) {
-                String[] items = in.nextLine().split(" ");
-                if(items[0].equals("")) {
-                    if(validPassport(hm)) {
-                        part1 += 1;
-                        if (passportRules(hm)) part2 += 1;
-                    }
-                    hm.clear();
+                String line = in.nextLine();
+                if(line.isEmpty()) {
+                    passports.add(pass.substring(0, pass.length() - 1));
+                    pass = new StringBuilder();
+                    continue;
                 }
-                else {
-                    for (String item : items) {
-                        String[] kvPair = item.split(":");
-                        hm.put(kvPair[0], kvPair[1]);
-                    }
-                }
+                pass.append(line);
+                pass.append(" ");
             }
+            passports.add(pass.substring(0, pass.length() - 1));
 
-            System.out.println(part1);
-            System.out.println(part2);
+            return passports;
         } catch(FileNotFoundException e) {
             System.out.println("Not safe!" + e.getMessage());
+            return new ArrayList<>();
         }
     }
 
-    public static boolean validPassport(HashMap<String, String> inputs) {
-        String[] fields = {"hcl", "iyr", "hgt", "byr", "pid", "cid", "eyr", "ecl"};
-
-        for(String field: fields) {
-            if(inputs.get(field) == null) {
-                if(field.equals("cid")) continue;
-                return false;
-            }
+    public static int part1(ArrayList<String> passports) {
+        int valid = 0;
+        for(String passport : passports) {
+            String[] items = passport.split(" ");
+            Map<String, String> mapped = Arrays.stream(items).map(s -> s.split(":")).collect(
+                    Collectors.toMap(s -> s[0].trim(), s -> s[1].trim()));
+            valid += (items.length == 8 || items.length == 7 && mapped.get("cid") == null) ? 1 : 0;
         }
-
-        return true;
+        return valid;
     }
 
+    public static int part2(ArrayList<String> passports) {
+        int valid = 0;
+        for(String passport : passports) valid += followsNewRules(passport) ? 1 : 0;
+        return valid;
+    }
+
+    public static boolean followsNewRules() {
+
+    }
     public static boolean passportRules(HashMap<String, String> inputs) {
 
         boolean byrCompare = false,
