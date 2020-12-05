@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Day1 {
+    final static int PRINCIPAL = 2020;
+
     public static void main(String[] args) {
         try(Scanner in = new Scanner(new File("input1.txt"))){
             ArrayList<Integer> al = new ArrayList<>();
@@ -19,7 +21,6 @@ public class Day1 {
     }
 
     public static int part1(ArrayList<Integer> years) {
-        final int PRINCIPAL = 2020;
         HashMap<Integer, Integer> hm = new HashMap<>();
         for(int year : years) hm.put(year, PRINCIPAL - year);
         for(int key : hm.keySet()) if(hm.containsKey(PRINCIPAL - key)) return key * hm.get(key);
@@ -27,7 +28,7 @@ public class Day1 {
     }
 
     public static int part2(ArrayList<Integer> years) {
-        for(int i: years) for(int j: years) for(int k: years) if(i + j + k == 2020) return i * j * k;
+        for(int i: years) for(int j: years) for(int k: years) if(i + j + k == PRINCIPAL) return i * j * k;
         return 0;
     }
 }

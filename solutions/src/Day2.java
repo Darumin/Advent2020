@@ -5,28 +5,22 @@ import java.util.ArrayList;
 
 public class Day2 {
     public static void main(String[] args) {
-        try {
-            File newFile = new File("input2.txt");
-            Scanner in = new Scanner(newFile);
-            ArrayList<String> hm = new ArrayList<>();
+        try(Scanner in = new Scanner(new File("input2.txt"))){
+            ArrayList<String> al = new ArrayList<>();
+            while(in.hasNextLine()) al.add(in.nextLine());
 
-            while(in.hasNextLine()) {
-                hm.add(in.nextLine());
-            }
-
-            part1(hm);
-            part2(hm);
+            System.out.println("Part 1 -> " + part1(al));
+            System.out.println("Part 2 -> " + part2(al));
         }
         catch (FileNotFoundException e) {
-            System.out.println("Not safe!" + e.getMessage());
+            e.getStackTrace();
         }
     }
 
-    public static void part1(ArrayList<String> puzzleInput) {
+    public static int part1(ArrayList<String> passwords) {
         int validPasswords = 0;
-
-        for(String str: puzzleInput){
-            String[] spaces = str.split(" ");
+        for(String password: passwords){
+            String[] spaces = password.split(" ");
             String[] hyphens = spaces[0].split("-");
             int a = Integer.parseInt(hyphens[0]), b = Integer.parseInt(hyphens[1]);
             char symbol = spaces[1].charAt(0);
@@ -34,20 +28,19 @@ public class Day2 {
             validPasswords += (count >= a && count <= b) ? 1 : 0;
         }
 
-        System.out.println("Valid passwords: " + validPasswords);
+        return validPasswords;
     }
 
-    public static void part2(ArrayList<String> puzzleInput) {
+    public static int part2(ArrayList<String> passwords) {
         int validPasswords = 0;
-
-        for(String str: puzzleInput){
-            String[] spaces = str.split(" ");
+        for(String password: passwords){
+            String[] spaces = password.split(" ");
             String[] hyphens = spaces[0].split("-");
             int a = Integer.parseInt(hyphens[0]), b = Integer.parseInt(hyphens[1]);
             char symbol = spaces[1].charAt(0);
             validPasswords += (spaces[2].charAt(a - 1) == symbol) ^ (spaces[2].charAt(b - 1) == symbol) ? 1 : 0;
         }
 
-        System.out.println("Valid passwords: " + validPasswords);
+        return validPasswords;
     }
 }
