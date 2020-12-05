@@ -50,13 +50,13 @@ public class Day4 {
 
     public static int part2(ArrayList<String> passports) {
         int valid = 0;
-        for(String passport : passports) valid += followsNewRules(passport) ? 1 : 0;
+//        for(String passport : passports) valid += followsNewRules(passport) ? 1 : 0;
         return valid;
     }
 
-    public static boolean followsNewRules() {
-
-    }
+//    public static boolean followsNewRules() {
+//
+//    }
     public static boolean passportRules(HashMap<String, String> inputs) {
 
         boolean byrCompare = false,

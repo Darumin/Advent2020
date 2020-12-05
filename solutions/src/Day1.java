@@ -6,32 +6,28 @@ import java.util.ArrayList;
 
 public class Day1 {
     public static void main(String[] args) {
-        try {
-            File newFile = new File("input1.txt");
-            Scanner in = new Scanner(newFile);
-            HashMap<Integer, Integer> hm = new HashMap<>();
+        try(Scanner in = new Scanner(new File("input1.txt"))){
             ArrayList<Integer> al = new ArrayList<>();
+            while(in.hasNextLine()) al.add(Integer.parseInt(in.nextLine()));
 
-            while(in.hasNextLine()) { al.add(Integer.parseInt(in.nextLine())); }
-
-            for(int i: al) {
-                for(int j: al) {
-                    for(int k: al) {
-                        if(i + j + k == 2020) {
-                            System.out.printf("%d, %d, %d\n", i, j, k);
-                            System.out.printf("%d\n", i * j * k);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            in.close();
+            System.out.println("Part 1 -> " + part1(al));
+            System.out.println("Part 2 -> " + part2(al));
         }
         catch (FileNotFoundException e) {
-            System.out.println("Not safe!" + e.getMessage());
+            e.getStackTrace();
         }
+    }
 
+    public static int part1(ArrayList<Integer> years) {
+        final int PRINCIPAL = 2020;
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        for(int year : years) hm.put(year, PRINCIPAL - year);
+        for(int key : hm.keySet()) if(hm.containsKey(PRINCIPAL - key)) return key * hm.get(key);
+        return 0;
+    }
 
+    public static int part2(ArrayList<Integer> years) {
+        for(int i: years) for(int j: years) for(int k: years) if(i + j + k == 2020) return i * j * k;
+        return 0;
     }
 }
