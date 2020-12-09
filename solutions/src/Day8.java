@@ -6,7 +6,7 @@ public class Day8 {
     public static void main(String[] args) {
         try (Scanner in = new Scanner(new File("input8.txt"))) {
             List<String> instructions = new ArrayList<>();
-            while(in.hasNextLine()) instructions.add(in.nextLine());
+            while (in.hasNextLine()) instructions.add(in.nextLine());
 
             System.out.println(part1(instructions).ACC);
             System.out.println(part2(instructions));
@@ -20,7 +20,7 @@ public class Day8 {
         List<Integer> repeats = new ArrayList<>();
 
         for (int i = 0; i < instructions.size(); i++) {
-            if(repeats.contains(i)) break;
+            if (repeats.contains(i)) break;
             else repeats.add(i);
 
             String[] tokens = instructions.get(i).split(" ");
@@ -40,7 +40,7 @@ public class Day8 {
             }
         }
 
-       return new Info(part1, repeats.get(repeats.size() - 1));
+        return new Info(part1, repeats.get(repeats.size() - 1));
     }
 
     public static int part2(List<String> instructions) {
@@ -48,11 +48,11 @@ public class Day8 {
             String operation = instructions.get(i);
 
             // Flip
-            if(!flipCode(operation, instructions, i)) continue;
+            if (!flipCode(operation, instructions, i)) continue;
             Info inf = part1(instructions);
 
             // If has a normal exit code
-            if(inf.LAST_CODE == instructions.size() - 1) return inf.ACC;
+            if (inf.LAST_CODE == instructions.size() - 1) return inf.ACC;
 
             // Else flip back
             operation = instructions.get(i);
